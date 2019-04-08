@@ -7,6 +7,20 @@ from selenium import webdriver
 from selenium.common import exceptions
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
+SNAPSHOT_JS = """
+    var ele = document.querySelector('div[_echarts_instance_]');
+    var mychart = echarts.getInstanceByDom(ele);
+    return mychart.getDataURL({
+        type: '%s',
+        pixelRatio: %s,
+         excludeComponents: ['toolbox']
+    });
+"""
+SNAPSHOT_SVG_JS = """
+   var element = document.querySelector('div[_echarts_instance_] div');
+   return element.innerHTML;
+"""
+
 
 def make_snapshot(
     html_path: str,
@@ -25,39 +39,27 @@ def make_snapshot(
         raise Exception('Unknown browser!')
     driver.set_script_timeout(delay + 1)
 
+    if file_type == 'svg':
+        snapshot_js = SNAPSHOT_SVG_JS
+    else:
+        snapshot_js = SNAPSHOT_JS % (file_type, pixel_ratio)
+
     if not html_path.startswith("http"):
         html_path = 'file://' + os.path.abspath(html_path)
     driver.get(html_path)
     time.sleep(delay)
 
     try:
-        output = driver.execute_script(__gen_js_code(file_type, pixel_ratio, delay))
+        output = driver.execute_script(snapshot_js)
         driver.close()
         return output
     except exceptions.TimeoutException:
         raise Exception("Failed to get snapshot content")
 
 
-def __gen_js_code(file_type: str, pixel_ratio: int, delay: int) -> str:
-    script = (
-        """
-        var ele = document.querySelector('div[_echarts_instance_]');
-        var mychart = echarts.getInstanceByDom(ele);
-        return mychart.getDataURL(
-            {type:'--file-type--', pixelRatio: --pixel-ratio--, excludeComponents: ['toolbox']});
-    """.replace(
-            "--file-type--", file_type
-        )
-        .replace("--pixel-ratio--", str(pixel_ratio))
-    )
-    return script
-
-
 def get_chrome():
     option = webdriver.ChromeOptions()
     option.add_argument("headless")
-    if sys.platform == 'darwin':
-        option.binary_location = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
     capabilities = DesiredCapabilities.CHROME
     capabilities["loggingPrefs"] = {"browser": "ALL"}
     return webdriver.Chrome(
