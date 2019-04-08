@@ -16,7 +16,15 @@ snapshot-selenium
 Installation
 ================================================================================
 
-You can get it:
+
+You can install snapshot-selenium via pip:
+
+.. code-block:: bash
+
+    $ pip install snapshot-selenium
+
+
+or clone it and install it:
 
 .. code-block:: bash
 
