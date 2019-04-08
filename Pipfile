@@ -7,3 +7,10 @@ name = 'pypi'
 python_version= '3.6'
 
 [packages]
+
+[dev-packages]
+nose = "*"
+mock = "*"
+codecov = "*"
+coverage = "*"
+flake8 = "*"

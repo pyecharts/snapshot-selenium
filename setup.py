@@ -4,13 +4,28 @@
 import os
 import sys
 import codecs
+import locale
+import platform
 from shutil import rmtree
 
 from setuptools import Command, setup, find_packages
 
-from platform import python_implementation
 PY2 = sys.version_info[0] == 2
 PY26 = PY2 and sys.version_info[1] < 7
+PY33 = sys.version_info < (3, 4)
+
+# Work around mbcs bug in distutils.
+# http://bugs.python.org/issue10945
+# This work around is only if a project supports Python < 3.4
+
+# Work around for locale not being set
+try:
+    lc = locale.getlocale()
+    pf = platform.system()
+    if pf != 'Windows' and lc == (None, None):
+        locale.setlocale(locale.LC_ALL, 'C.UTF-8')
+except (ValueError, UnicodeError, locale.Error):
+    locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
 NAME = 'snapshot-selenium'
 AUTHOR = 'C.W.'
@@ -159,6 +174,7 @@ def filter_out_test_code(file_handle):
 
 if __name__ == '__main__':
     setup(
+        test_suite="tests",
         name=NAME,
         author=AUTHOR,
         version=VERSION,
