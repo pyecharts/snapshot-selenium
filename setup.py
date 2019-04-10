@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 
-# Template by pypi-mobans
-import os
-import sys
 import codecs
 import locale
+
+# Template by pypi-mobans
+import os
 import platform
+import sys
 from shutil import rmtree
 
-from setuptools import Command, setup, find_packages
+from setuptools import Command, find_packages, setup
 
 # Work around mbcs bug in distutils.
 # http://bugs.python.org/issue10945
