@@ -1,9 +1,8 @@
 import time
 import os
+from typing import Any
 
 from selenium import webdriver
-from selenium.common import exceptions
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 SNAPSHOT_JS = """
     var ele = document.querySelector('div[_echarts_instance_]');
@@ -14,6 +13,7 @@ SNAPSHOT_JS = """
          excludeComponents: ['toolbox']
     });
 """
+
 SNAPSHOT_SVG_JS = """
    var element = document.querySelector('div[_echarts_instance_] div');
    return element.innerHTML;
@@ -25,45 +25,38 @@ def make_snapshot(
     file_type: str,
     pixel_ratio: int = 2,
     delay: int = 2,
-    browser='Chrome'
+    browser="Chrome",
+    driver: Any = None,
 ):
     if delay < 0:
-        raise Exception('Time travel is not possible')
-    if browser == 'Chrome':
-        driver = get_chrome()
-    elif browser == 'Safari':
-        driver = get_safari()
-    else:
-        raise Exception('Unknown browser!')
-    driver.set_script_timeout(delay + 1)
+        raise Exception("Time travel is not possible")
+    if not driver:
+        if browser == "Chrome":
+            driver = get_chrome_driver()
+        elif browser == "Safari":
+            driver = get_safari_driver()
+        else:
+            raise Exception("Unknown browser!")
 
-    if file_type == 'svg':
+    if file_type == "svg":
         snapshot_js = SNAPSHOT_SVG_JS
     else:
         snapshot_js = SNAPSHOT_JS % (file_type, pixel_ratio)
 
     if not html_path.startswith("http"):
-        html_path = 'file://' + os.path.abspath(html_path)
+        html_path = "file://" + os.path.abspath(html_path)
+
     driver.get(html_path)
     time.sleep(delay)
 
-    try:
-        output = driver.execute_script(snapshot_js)
-        driver.close()
-        return output
-    except exceptions.TimeoutException:
-        raise Exception("Failed to get snapshot content")
+    return driver.execute_script(snapshot_js)
 
 
-def get_chrome():
-    option = webdriver.ChromeOptions()
-    option.add_argument("headless")
-    capabilities = DesiredCapabilities.CHROME
-    capabilities["loggingPrefs"] = {"browser": "ALL"}
-    return webdriver.Chrome(
-        options=option,
-        desired_capabilities=capabilities)
+def get_chrome_driver():
+    options = webdriver.ChromeOptions()
+    options.add_argument("headless")
+    return webdriver.Chrome(options=options)
 
 
-def get_safari():
-    return webdriver.Safari(executable_path='/usr/bin/safaridriver')
+def get_safari_driver():
+    return webdriver.Safari()
