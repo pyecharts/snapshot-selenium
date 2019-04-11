@@ -10,6 +10,7 @@ from shutil import rmtree
 
 from setuptools import Command, find_packages, setup
 
+
 # Work around mbcs bug in distutils.
 # http://bugs.python.org/issue10945
 # This work around is only if a project supports Python < 3.4
@@ -28,16 +29,23 @@ AUTHOR = "pyecharts dev team"
 VERSION = "0.0.1"
 EMAIL = "info@pyecharts.com"
 LICENSE = "MIT"
-DESCRIPTION = "Render echarts using selenium"
+DESCRIPTION = (
+    "Render echarts using selenium"
+)
 URL = "https://github.com/pyecharts/snapshot-selenium"
 DOWNLOAD_URL = "%s/archive/0.0.1.tar.gz" % URL
 FILES = ["README.rst", "CHANGELOG.rst"]
-KEYWORDS = ["python"]
+KEYWORDS = [
+    "python",
+    "pyecharts",
+    "chart",
+]
 
 CLASSIFIERS = [
     "Topic :: Software Development :: Libraries",
     "Programming Language :: Python",
     "Intended Audience :: Developers",
+
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.3",
     "Programming Language :: Python :: 3.4",
@@ -45,26 +53,23 @@ CLASSIFIERS = [
     "Programming Language :: Python :: 3.6",
 ]
 
-INSTALL_REQUIRES = ["selenium"]
+INSTALL_REQUIRES = [
+    "selenium",
+]
 SETUP_COMMANDS = {}
 
 
 PACKAGES = find_packages(exclude=["ez_setup", "examples", "tests"])
-EXTRAS_REQUIRE = {}
+EXTRAS_REQUIRE = {
+}
 # You do not need to read beyond this line
-PUBLISH_COMMAND = "{0} setup.py sdist bdist_wheel upload -r pypi".format(
-    sys.executable
-)
-GS_COMMAND = (
-    "gs snapshot-selenium v0.0.1 " + "Find 0.0.1 in changelog for more details"
-)
-NO_GS_MESSAGE = (
-    "Automatic github release is disabled. "
-    + "Please install gease to enable it."
-)
+PUBLISH_COMMAND = "{0} setup.py sdist bdist_wheel upload -r pypi".format(sys.executable)
+GS_COMMAND = ("gs snapshot-selenium v0.0.1 " +
+              "Find 0.0.1 in changelog for more details")
+NO_GS_MESSAGE = ("Automatic github release is disabled. " +
+                 "Please install gease to enable it.")
 UPLOAD_FAILED_MSG = (
-    'Upload failed. please run "%s" yourself.' % PUBLISH_COMMAND
-)
+    'Upload failed. please run "%s" yourself.' % PUBLISH_COMMAND)
 HERE = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -107,7 +112,9 @@ class PublishCommand(Command):
         sys.exit()
 
 
-SETUP_COMMANDS.update({"publish": PublishCommand})
+SETUP_COMMANDS.update({
+    "publish": PublishCommand
+})
 
 
 def has_gease():
@@ -118,7 +125,6 @@ def has_gease():
     """
     try:
         import gease  # noqa
-
         return True
     except ImportError:
         return False
@@ -186,5 +192,5 @@ if __name__ == "__main__":
         include_package_data=True,
         zip_safe=False,
         classifiers=CLASSIFIERS,
-        cmdclass=SETUP_COMMANDS,
+        cmdclass=SETUP_COMMANDS
     )
