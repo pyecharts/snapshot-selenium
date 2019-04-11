@@ -10,6 +10,10 @@ copyright_year: 2019
 license: MIT
 nodocs: true
 min_python_version: "3.3"
+gitignore_global_rulesets:
+  - Emacs
+  - macOS
+  - Windows
 keywords:
   - pyecharts
   - chart
