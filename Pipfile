@@ -7,7 +7,7 @@ name = 'pypi'
 python_version= '3.6'
 
 [packages]
-selenium = "*"
+    selenium = "*"
 
 [dev-packages]
 nose = "*"
