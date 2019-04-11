@@ -8,6 +8,7 @@ current_version: "0.0.1"
 release: "0.0.1"
 copyright_year: 2019
 license: MIT
+nodocs: true
 dependencies:
   - selenium
 description: "Render echarts using selenium"

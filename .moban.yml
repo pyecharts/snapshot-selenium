@@ -12,7 +12,6 @@ targets:
   - setup.py: custom_setup.py.jj2
   - requirements.txt: requirements.txt.jj2
   - "tests/requirements.txt": "tests/custom_requirements.txt.jj2"
-  - "docs/source/conf.py": "docs/conf.py_t"
   - test.sh: test.script.jj2
   - "snapshot_selenium/_version.py": "_version.py.jj2"
   - .gitignore: gitignore.jj2

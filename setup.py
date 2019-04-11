@@ -10,6 +10,7 @@ from shutil import rmtree
 
 from setuptools import Command, find_packages, setup
 
+
 # Work around mbcs bug in distutils.
 # http://bugs.python.org/issue10945
 # This work around is only if a project supports Python < 3.4
