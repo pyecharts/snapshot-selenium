@@ -1,0 +1,5 @@
+{% extends 'gitignore.jj2' %}
+
+{%block extra %}
+.idea
+{%endblock%}
