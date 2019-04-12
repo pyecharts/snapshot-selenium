@@ -9,7 +9,7 @@ release: "0.0.2"
 copyright_year: 2019
 license: MIT
 nodocs: true
-min_python_version: "3.3"
+min_python_version: "3.5"
 gitignore_global_rulesets:
   - Emacs
   - macOS
