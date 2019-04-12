@@ -1,8 +1,10 @@
 requires:
-  - pypi-mobans-pkg==0.0.4
+  - type: git
+    url: https://github.com/moremoban/pypi-mobans
+    submodule: true
 configuration:
   template_dir:
-  - "pypi-mobans-pkg:templates"
+  - "pypi-mobans:templates"
   - ".moban.d"
   configuration: snapshot-selenium.yml
 targets:
@@ -10,9 +12,11 @@ targets:
   - setup.py: custom_setup.py.jj2
   - requirements.txt: requirements.txt.jj2
   - "tests/requirements.txt": "tests/custom_requirements.txt.jj2"
-  - "docs/source/conf.py": "docs/conf.py_t"
   - test.sh: test.script.jj2
   - "snapshot_selenium/_version.py": "_version.py.jj2"
-  - .gitignore: gitignore.jj2
-  - .travis.yml: travis.yml.jj2
+  - .gitignore: custom_gitignore.jj2
+  - .travis.yml: custom_travis.yml
   - Pipfile: Pipfile.jj2
+  - output: CHANGELOG.rst
+    template: CHANGELOG.rst.jj2
+  - lint.sh: lint.script.jj2

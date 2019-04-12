@@ -1,12 +1,35 @@
 name: "snapshot-selenium"
 organisation: "pyecharts"
-author: "C.W."
+author: "pyecharts dev team"
 contact: "info@pyecharts.com"
 company: "pyecharts dev team"
-version: "0.0.1"
-current_version: "0.0.1"
-release: "0.0.1"
+version: "0.0.2"
+current_version: "0.0.2"
+release: "0.0.2"
 copyright_year: 2019
 license: MIT
-dependencies: []
+nodocs: true
+min_python_version: "3.5"
+gitignore_global_rulesets:
+  - Emacs
+  - macOS
+  - Windows
+keywords:
+  - pyecharts
+  - chart
+dependencies:
+  - selenium
 description: "Render echarts using selenium"
+releases:
+- changes:
+  - action: update
+    details:
+    - it will take an external browser driver and render images
+  version: 0.0.2
+  date: 01.04.2019
+- changes:
+  - action: first release
+    details:
+    - use selenium driver for rendering pyecharts output as image
+  version: 0.0.1
+  date: 09.04.2019
