@@ -21,3 +21,16 @@ keywords:
 dependencies:
   - selenium
 description: "Render echarts using selenium"
+releases:
+- changes:
+  - action: update
+    details:
+    - it will take an external browser driver and render images
+  version: 0.0.2
+  date: 01.04.2019
+- changes:
+  - action: first release
+    details:
+    - use selenium driver for rendering pyecharts output as image
+  version: 0.0.1
+  date: 09.04.2019

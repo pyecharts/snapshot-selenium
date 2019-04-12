@@ -18,6 +18,5 @@ targets:
   - .travis.yml: custom_travis.yml
   - Pipfile: Pipfile.jj2
   - output: CHANGELOG.rst
-    configuration: changelog.yml
     template: CHANGELOG.rst.jj2
   - lint.sh: lint.script.jj2
