@@ -14,7 +14,6 @@ gitignore_global_rulesets:
   - Emacs
   - macOS
   - Windows
-  - JetBrains
 keywords:
   - pyecharts
   - chart
