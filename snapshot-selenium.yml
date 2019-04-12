@@ -1,8 +1,5 @@
+overrides: pyecharts.yml
 name: "snapshot-selenium"
-organisation: "pyecharts"
-author: "pyecharts dev team"
-contact: "info@pyecharts.com"
-company: "pyecharts dev team"
 version: "0.0.2"
 current_version: "0.0.2"
 release: "0.0.2"
@@ -10,13 +7,6 @@ copyright_year: 2019
 license: MIT
 nodocs: true
 min_python_version: "3.5"
-gitignore_global_rulesets:
-  - Emacs
-  - macOS
-  - Windows
-keywords:
-  - pyecharts
-  - chart
 dependencies:
   - selenium
 description: "Render echarts using selenium"

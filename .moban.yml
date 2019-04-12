@@ -2,20 +2,24 @@ requires:
   - type: git
     url: https://github.com/moremoban/pypi-mobans
     submodule: true
+  - type: git
+    url: https://github.com/pyecharts/pyecharts-mobans
 configuration:
+  configuration_dir: "pyecharts-mobans:config"
   template_dir:
+  - "pyecharts-mobans:templates"
   - "pypi-mobans:templates"
   - ".moban.d"
   configuration: snapshot-selenium.yml
 targets:
   - README.rst: CUSTOM_README.rst.jj2
-  - setup.py: custom_setup.py.jj2
+  - setup.py: pyecharts_setup.py.jj2
   - requirements.txt: requirements.txt.jj2
-  - "tests/requirements.txt": "tests/custom_requirements.txt.jj2"
+  - "tests/requirements.txt": "tests/pyecharts_requirements.txt.jj2"
   - test.sh: test.script.jj2
   - "snapshot_selenium/_version.py": "_version.py.jj2"
-  - .gitignore: custom_gitignore.jj2
-  - .travis.yml: custom_travis.yml
+  - .gitignore: pyecharts_gitignore.jj2
+  - .travis.yml: pyecharts_travis.yml.jj2
   - Pipfile: Pipfile.jj2
   - output: CHANGELOG.rst
     template: CHANGELOG.rst.jj2
