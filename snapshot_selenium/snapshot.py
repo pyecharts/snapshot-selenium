@@ -55,7 +55,7 @@ def make_snapshot(
 def get_chrome_driver():
     options = webdriver.ChromeOptions()
     options.add_argument("headless")
-    return webdriver.Chrome(options=options)
+    return webdriver.Chrome(chrome_options=options)
 
 
 def get_safari_driver():
