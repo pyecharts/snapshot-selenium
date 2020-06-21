@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 
-# Template by pypi-mobans
+"""
+Template by pypi-mobans
+"""
+
+import os
+import sys
 import codecs
 import locale
-import os
 import platform
-import sys
 from shutil import rmtree
 
-from setuptools import Command, find_packages, setup
+from setuptools import Command, setup, find_packages
 
 
 # Work around mbcs bug in distutils.
@@ -29,36 +32,50 @@ AUTHOR = "pyecharts dev team"
 VERSION = "0.0.2"
 EMAIL = "info@pyecharts.com"
 LICENSE = "MIT"
-DESCRIPTION = "Render echarts using selenium"
+DESCRIPTION = (
+    "Render echarts using selenium"
+)
 URL = "https://github.com/pyecharts/snapshot-selenium"
 DOWNLOAD_URL = "%s/archive/0.0.2.tar.gz" % URL
 FILES = ["README.rst", "CHANGELOG.rst"]
-KEYWORDS = ["python", "pyecharts", "chart"]
+KEYWORDS = [
+    "python",
+    "pyecharts",
+    "chart",
+]
 
 CLASSIFIERS = [
     "Topic :: Software Development :: Libraries",
     "Programming Language :: Python",
     "Intended Audience :: Developers",
+
     "Programming Language :: Python :: 3 :: Only",
+
+
     "Programming Language :: Python :: 3.5",
     "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
+
 ]
 
-INSTALL_REQUIRES = ["selenium"]
+
+INSTALL_REQUIRES = [
+    "selenium",
+]
 SETUP_COMMANDS = {}
 
-
-PACKAGES = find_packages(exclude=["ez_setup", "examples", "tests"])
-EXTRAS_REQUIRE = {}
+PACKAGES = find_packages(exclude=["ez_setup", "examples", "tests", "tests.*"])
+EXTRAS_REQUIRE = {
+}
 # You do not need to read beyond this line
 PUBLISH_COMMAND = "{0} setup.py sdist bdist_wheel upload -r pypi".format(sys.executable)
-GS_COMMAND = "gs snapshot-selenium v0.0.2 " + "Find 0.0.2 in changelog for more details"
-NO_GS_MESSAGE = (
-    "Automatic github release is disabled. " + "Please install gease to enable it."
-)
-UPLOAD_FAILED_MSG = 'Upload failed. please run "%s" yourself.' % PUBLISH_COMMAND
+GS_COMMAND = ("gs snapshot-selenium v0.0.2 " +
+              "Find 0.0.2 in changelog for more details")
+NO_GS_MESSAGE = ("Automatic github release is disabled. " +
+                 "Please install gease to enable it.")
+UPLOAD_FAILED_MSG = (
+    'Upload failed. please run "%s" yourself.' % PUBLISH_COMMAND)
 HERE = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -96,12 +113,14 @@ class PublishCommand(Command):
             self.status(NO_GS_MESSAGE)
         if run_status:
             if os.system(PUBLISH_COMMAND) != 0:
-                self.status(UPLOAD_FAILED_MSG % PUBLISH_COMMAND)
+                self.status(UPLOAD_FAILED_MSG)
 
         sys.exit()
 
 
-SETUP_COMMANDS.update({"publish": PublishCommand})
+SETUP_COMMANDS.update({
+    "publish": PublishCommand
+})
 
 
 def has_gease():
@@ -112,7 +131,6 @@ def has_gease():
     """
     try:
         import gease  # noqa
-
         return True
     except ImportError:
         return False
@@ -180,5 +198,5 @@ if __name__ == "__main__":
         include_package_data=True,
         zip_safe=False,
         classifiers=CLASSIFIERS,
-        cmdclass=SETUP_COMMANDS,
+        cmdclass=SETUP_COMMANDS
     )

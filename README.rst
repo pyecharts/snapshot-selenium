@@ -7,10 +7,15 @@ snapshot-selenium
 
 .. image:: https://codecov.io/github/pyecharts/snapshot-selenium/coverage.png
    :target: https://codecov.io/github/pyecharts/snapshot-selenium
+.. image:: https://badge.fury.io/py/snapshot-selenium.svg
+   :target: https://pypi.org/project/snapshot-selenium
 
+.. image:: https://pepy.tech/badge/snapshot-selenium/month
+   :target: https://pepy.tech/project/snapshot-selenium/month
 
-.. image:: https://readthedocs.org/projects/snapshot-selenium/badge/?version=latest
-   :target: http://snapshot-selenium.readthedocs.org/en/latest/
+.. image:: https://img.shields.io/github/stars/pyecharts/snapshot-selenium.svg?style=social&maxAge=3600&label=Star
+    :target: https://github.com/pyecharts/snapshot-selenium/stargazers
+
 
 
 Installation

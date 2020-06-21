@@ -1,14 +1,19 @@
 all: test
 
-test:
+test: lint
 	bash test.sh
 
-format:
-	isort -rc .
-	black -l 79 snapshot_selenium
-	black -l 79 setup.py
-	black -l 79 tests
+install_test:
+	pip install -r tests/requirements.txt
 
+git-diff-check:
+	git diff --exit-code
 
 lint:
-	make lint
+	bash lint.sh
+
+format:
+	bash format.sh
+
+git-diff-check:
+	git diff --exit-code
