@@ -4,6 +4,10 @@ from typing import Any
 
 from selenium import webdriver
 
+from selenium.webdriver.chrome.service import Service  # set chromedriver
+from chromedriver_py import binary_path  # add chromedriver
+
+
 SNAPSHOT_JS = """
     var ele = document.querySelector('div[_echarts_instance_]');
     var mychart = echarts.getInstanceByDom(ele);
@@ -55,7 +59,10 @@ def make_snapshot(
 def get_chrome_driver():
     options = webdriver.ChromeOptions()
     options.add_argument("headless")
-    return webdriver.Chrome(options=options)
+    return webdriver.Chrome(
+        options=options,
+        service=Service(binary_path)  # bind chromedriver
+    )
 
 
 def get_safari_driver():
