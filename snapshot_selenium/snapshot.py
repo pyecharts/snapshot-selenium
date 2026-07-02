@@ -31,12 +31,13 @@ def make_snapshot(
     delay: int = 2,
     browser="Chrome",
     driver: Any = None,
+    driver_path: str = None,
 ):
     if delay < 0:
         raise Exception("Time travel is not possible")
     if not driver:
         if browser == "Chrome":
-            driver = get_chrome_driver()
+            driver = get_chrome_driver(driver_path=driver_path)
         elif browser == "Safari":
             driver = get_safari_driver()
         else:
@@ -56,12 +57,13 @@ def make_snapshot(
     return driver.execute_script(snapshot_js)
 
 
-def get_chrome_driver():
+def get_chrome_driver(driver_path: str = None):
     options = webdriver.ChromeOptions()
     options.add_argument("headless")
+    service_path = driver_path if driver_path is not None else binary_path
     return webdriver.Chrome(
         options=options,
-        service=Service(binary_path)  # bind chromedriver
+        service=Service(service_path)  # bind chromedriver
     )
 
 
