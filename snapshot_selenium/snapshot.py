@@ -60,10 +60,10 @@ def make_snapshot(
 def get_chrome_driver(driver_path: str = None):
     options = webdriver.ChromeOptions()
     options.add_argument("headless")
-    service_path = driver_path if driver_path is not None else binary_path
+    driver_binary_path = driver_path if driver_path is not None else binary_path
     return webdriver.Chrome(
         options=options,
-        service=Service(service_path)  # bind chromedriver
+        service=Service(driver_binary_path)  # bind chromedriver
     )
 
 
